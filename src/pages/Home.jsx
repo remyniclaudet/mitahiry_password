@@ -21,7 +21,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6">
           <div className="flex items-center">
             <img 
-              src="/src/assets/mipass logo.png" 
+              src="/mipasslogo.png" 
               alt="Logo Mi-Pass" 
               className="h-10 w-auto mr-2 transition-transform duration-300 hover:scale-105"
             />
@@ -56,7 +56,7 @@ export default function Home() {
             <div className="p-6 flex flex-col h-full">
               <div className="flex justify-between items-center mb-8">
                 <img 
-                  src="/src/assets/mipass logo.png" 
+                  src="/mipasslogo.png" 
                   alt="Logo Mi-Pass" 
                   className="h-8 w-auto"
                 />

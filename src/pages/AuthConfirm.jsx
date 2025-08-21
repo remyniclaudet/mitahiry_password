@@ -46,7 +46,7 @@ export default function AuthConfirm() {
         localStorage.setItem("master_password", user.user_metadata.master_password);
 
         clearInterval(intervalRef.current); // Stop la boucle
-        navigate("/dashboard");
+        navigate("/login", { state: { signupSuccess: true } }); // Redirige vers login avec info succès
       }
     }, 3000); // Vérifie toutes les 3 secondes
 
@@ -60,6 +60,7 @@ export default function AuthConfirm() {
         <h2 className="text-xl font-semibold text-gray-800 mb-2">
           Confirmation en cours...
         </h2>
+        <p className="text-gray-600 mb-4">Pour accéder à votre coffre, veuillez entrer votre adresse email.</p>
         <p className="text-gray-600">
           Veuillez cliquer sur le lien reçu par email pour activer votre compte.<br />
           Cette page se mettra à jour automatiquement après confirmation.

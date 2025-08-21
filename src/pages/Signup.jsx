@@ -94,7 +94,7 @@ export default function Signup() {
       {/* Logo avec espacement de 40px depuis le haut */}
       <div className="mt-10">
         <img 
-          src="/src/assets/mipass logo.png" 
+          src="/mipasslogo.png" 
           alt="Logo Mi-Pass" 
           className="h-16 w-auto mx-auto"
         />

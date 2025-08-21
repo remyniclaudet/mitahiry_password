@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Login() {
   const [step, setStep] = useState("email");
@@ -9,7 +9,17 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [userName, setUserName] = useState("");
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.signupSuccess) {
+      setToast({ show: true, message: "Compte créé avec succès ! Veuillez vous connecter.", type: "success" });
+      // Nettoie l'état pour éviter le toast à chaque retour
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -92,7 +102,7 @@ export default function Login() {
       {/* Logo avec espacement de 40px depuis le haut */}
       <div className="mt-10">
         <img 
-          src="/src/assets/mipass logo.png" 
+          src="/mipasslogo.png" 
           alt="Logo Mi-Pass" 
           className="h-16 w-auto mx-auto"
         />
@@ -199,6 +209,14 @@ export default function Login() {
             Créez-en un
           </a>
         </p>
+      )}
+
+      {toast.show && (
+        <div className={`fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transition-transform duration-300 ${
+          toast.type === "error" ? "bg-red-500 text-white" : "bg-green-500 text-white"
+        }`}>
+          {toast.message}
+        </div>
       )}
     </div>
   );
