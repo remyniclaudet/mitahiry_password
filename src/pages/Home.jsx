@@ -334,46 +334,13 @@ export default function Home() {
               </p>
             </div>
             
-            <div>
-              <h4 className="text-white font-semibold mb-4">Produit</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#features" className="text-orange-200 hover:text-white transition-colors">Fonctionnalités</a></li>
-                <li><a href="#security" className="text-orange-200 hover:text-white transition-colors">Sécurité</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Tarifs</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">FAQ</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-semibold mb-4">Entreprise</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">À propos</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Carrières</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Presse</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Centre d'aide</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Status</a></li>
-                <li><a href="#" className="text-orange-200 hover:text-white transition-colors">Community</a></li>
-              </ul>
-            </div>
+        
+
           </div>
           
           <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
             <div className="text-orange-200 text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} Mi-Pass. Tous droits réservés.
-            </div>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-orange-200 hover:text-white transition-colors">Mentions légales</a>
-              <a href="#" className="text-orange-200 hover:text-white transition-colors">Confidentialité</a>
-              <a href="#" className="text-orange-200 hover:text-white transition-colors">Cookies</a>
-              <a href="#" className="text-orange-200 hover:text-white transition-colors">Conditions</a>
             </div>
           </div>
         </div>
