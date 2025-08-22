@@ -22,6 +22,8 @@ export default function Dashboard() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const [editingCredential, setEditingCredential] = useState(null);
+  const [credentialToDelete, setCredentialToDelete] = useState(null);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -227,6 +229,24 @@ export default function Dashboard() {
     }
   };
 
+  const confirmDeleteCredential = async () => {
+    if (!credentialToDelete) return;
+    try {
+      const { error } = await supabase.from("passwords").delete().eq("id", credentialToDelete);
+      if (error) {
+        showToast("Erreur lors de la suppression du mot de passe", "error");
+      } else {
+        fetchCredentials();
+        showToast("Mot de passe supprimé avec succès", "success");
+      }
+    } catch (error) {
+      showToast("Erreur lors de la suppression du mot de passe", "error");
+    } finally {
+      setShowDeletePopup(false);
+      setCredentialToDelete(null);
+    }
+  };
+
   const editCredential = (credential) => {
     setEditingCredential(credential);
     setSite(credential.site);
@@ -281,7 +301,7 @@ export default function Dashboard() {
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo Mi-Pass" className="h-10 w-auto" />
+            <img src="/mipasslogo.png" alt="Logo Mi-Pass" className="h-10 w-auto" />
           </div>
           
           <div className="flex items-center gap-4">
@@ -623,7 +643,10 @@ export default function Dashboard() {
                         </button>
                         
                         <button
-                          onClick={() => deleteCredential(c.id)}
+                          onClick={() => {
+                            setCredentialToDelete(c.id);
+                            setShowDeletePopup(true);
+                          }}
                           className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100"
                           title="Supprimer"
                         >
@@ -651,6 +674,30 @@ export default function Dashboard() {
           toast.type === "error" ? "bg-red-500 text-white" : "bg-green-500 text-white"
         }`}>
           {toast.message}
+        </div>
+      )}
+
+      {/* Popup de confirmation de suppression */}
+      {showDeletePopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-sm">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Confirmation</h3>
+            <p className="mb-6 text-gray-700">Êtes-vous sûr de vouloir supprimer ce mot de passe ?</p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => { setShowDeletePopup(false); setCredentialToDelete(null); }}
+                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={confirmDeleteCredential}
+                className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
+              >
+                Supprimer
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
